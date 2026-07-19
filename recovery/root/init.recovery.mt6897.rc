@@ -1,0 +1,82 @@
+import /init.recovery.mitee.rc
+
+on init
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
+
+on boot
+    start health-hal-2-1
+    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
+
+on fs
+    install_keyring
+    wait /dev/block/platform/bootdevice
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    start boot-hal-1-2
+
+on property:ro.crypto.state=unsupported
+    stop miteelog
+    stop tee-supplicant
+    stop vendor.keymint-mitee
+    stop vendor.gatekeeper_mitee
+
+on property:ro.crypto.state=unencrypted
+    stop miteelog
+    stop tee-supplicant
+    stop vendor.keymint-mitee
+    stop vendor.gatekeeper_mitee
+
+on property:twrp.all.users.decrypted=true
+    stop miteelog
+    stop tee-supplicant
+    stop vendor.keymint-mitee
+    stop vendor.gatekeeper_mitee
+
+# MiTEE services for recovery
+service miteelog /system/bin/miteelog
+    class core
+    user root
+    group root system
+    disabled
+    oneshot
+
+    seclabel u:r:recovery:s0
+service tee-supplicant /system/bin/tee-supplicant
+    class core
+    user root
+    group root system secure_element nfc
+    capabilities SYS_RAWIO
+    disabled
+    seclabel u:r:recovery:s0
+service vendor.keymint-mitee /vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee
+    class core
+    user root
+    group root system
+    disabled
+
+    seclabel u:r:recovery:s0
+service vendor.gatekeeper_mitee /vendor/bin/hw/android.hardware.gatekeeper-service.mitee
+    class core
+    user root
+    group root system
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:vendor.teefs_state=ready
+    start miteelog
+    start tee-supplicant
+
+# "running" only confirms that the process was spawned.
+# Give tee-supplicant time to finish its MiTEE initialization.
+on property:init.svc.tee-supplicant=running
+    exec u:r:recovery:s0 root root -- /system/bin/sleep 3
+    start vendor.keymint-mitee
+
+# Start GateKeeper only after KeyMint has had time to initialize.
+on property:init.svc.vendor.keymint-mitee=running
+    exec u:r:recovery:s0 root root -- /system/bin/sleep 2
+    start vendor.gatekeeper_mitee
+
+# Start keystore2 after both proprietary security HALs.
+on property:init.svc.vendor.gatekeeper_mitee=running
+    exec u:r:recovery:s0 root root -- /system/bin/sleep 2
+    start keystore2

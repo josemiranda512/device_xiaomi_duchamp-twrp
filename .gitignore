@@ -1,0 +1,33 @@
+# Local backups
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+.*.swp
+
+# Local experiment snapshots
+*-backup-*/
+backup-*/
+local-backups/
+.mitee-backup-*/
+*.before-*
+*.crypto-backup-*
+*.before-pos-port
+
+# Editors and tools
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Build outputs
+out/
+*.img.tmp
+*.tar
+*.tar.gz
