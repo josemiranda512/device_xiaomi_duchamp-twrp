@@ -1,1 +1,5 @@
+# The hal_bootctl_default domain (android.hardware.boot-service.default_recovery)
+# is not marked permissive in this TWRP tree -- unlike the other recovery
+# domains, this one IS enforced, blocking access to /dev/block/by-name/misc
+# and preventing the service from initializing, leaving it in a crash loop.
 permissive hal_bootctl_default;
