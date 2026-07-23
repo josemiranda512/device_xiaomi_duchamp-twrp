@@ -1,6 +1,5 @@
 # Copyright (C) 2024 The Android Open Source Project
 # SPDX-License-Identifier: Apache-2.0
-
 LOCAL_PATH := device/$(PRODUCT_MANUFACTURER)/$(PRODUCT_DEVICE)
 
 # A/B
@@ -9,16 +8,12 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
-
 PRODUCT_PACKAGES += \
-    otapreopt_script 
-
+    otapreopt_script
 
 # Required for FBE metadata/data decryption
 PRODUCT_PACKAGES += \
     keystore2
-
-
 
 # POS-PORT: Recovery configuration
 AB_OTA_PARTITIONS += \
@@ -36,7 +31,6 @@ AB_OTA_PARTITIONS += \
     vendor \
     vendor_boot \
     vendor_dlkm
-
 PRODUCT_PACKAGES += \
     create_pl_dev \
     create_pl_dev.recovery \
@@ -72,7 +66,6 @@ PRODUCT_PACKAGES += \
 TARGET_RECOVERY_DEVICE_MODULES += \
     libion \
     libxml2
-
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
