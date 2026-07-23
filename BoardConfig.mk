@@ -15,7 +15,7 @@ AB_OTA_UPDATER := true
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv9-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 := 
+TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a76
 TARGET_CPU_VARIANT_RUNTIME := cortex-a76
 
@@ -50,10 +50,6 @@ TARGET_USES_LOGD := true
 # Display
 TARGET_SCREEN_DENSITY := 280
 
-# DTB
-
-# Kernel
-
 # Prebuilt DTB for vendor_boot
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 
@@ -87,9 +83,6 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
-
-
-
 
 # POS-PORT: Kernel and recovery modules
 BOARD_KERNEL_IMAGE_NAME := Image.lz4
@@ -138,11 +131,6 @@ BOARD_SUPER_PARTITION_GROUPS := mediatek_dynamic_partitions
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_PARTITION_LIST := odm odm_dlkm product system system_dlkm system_ext vendor vendor_dlkm
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_SIZE := 9659482112
 
-# Partition - Types
-
-
-
-
 # POS-PORT: Filesystem types
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
@@ -154,7 +142,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 # POS-PORT: End filesystem types
 
-
 # Dynamic partition mount points
 TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
@@ -163,7 +150,6 @@ TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
-
 
 # Recovery-only filesystem definitions
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -203,7 +189,5 @@ TW_EXCLUDE_TWRPAPP := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_DEVICE_VERSION := duchamp
 
-# Workaround for copy out error
-
-# Recovery-only filesystem definitions
+# Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
