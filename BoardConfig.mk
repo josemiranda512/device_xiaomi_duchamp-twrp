@@ -206,3 +206,4 @@ TW_DEVICE_VERSION := duchamp
 # Workaround for copy out error
 
 # Recovery-only filesystem definitions
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
