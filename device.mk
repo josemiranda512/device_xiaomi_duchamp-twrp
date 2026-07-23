@@ -90,11 +90,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcppbor_external \
     libcppcose_rkp
-
-# Fix: el manifest VINTF que trae com.android.hardware.boot usa <fqname>
-# (sintaxis que esta libvintf de recovery no reconoce) y ademas se instala
-# con type="device" en la carpeta equivocada. Lo sobreescribimos con una
-# version corregida: type="framework", sintaxis <interface>/<instance>,
-# misma carpeta que usa keystore2.xml (que si funciona).
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vintf/android.hardware.boot-service.default.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/vintf/manifest/android.hardware.boot-service.default.xml
